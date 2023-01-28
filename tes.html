@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Data Pelanggan dan Pesanan</title>
+  <style>
+    /* Style untuk tabel pelanggan dan pesanan */
+    table {
+      border-collapse: collapse;
+      width: 100%;
+    }
+    th, td {
+      border: 1px solid black;
+      padding: 8px;
+    }
+    th {
+      text-align: left;
+    }
+    /* Style untuk tombol */
+    .btn {
+      padding: 8px 16px;
+      font-size: 16px;
+      margin: 8px;
+    }
+  </style>
+</head>
+<body>
+  <h1>Data Pelanggan dan Pesanan</h1>
+  <button class="btn" onclick="showData('pelanggan')">Data Pelanggan</button>
+  <button class="btn" onclick="showData('pesanan')">Data Pesanan</button>
+  <div id="data-container">
+    <!-- Tabel data pelanggan akan ditampilkan di sini -->
+  </div>
+  
+  <script>
+    // Data pelanggan dan pesanan
+    var dataPelanggan = [
+      { nama: "John Doe", alamat: "Jl. Example 1", telepon: "123-456-7890" },
+      { nama: "Jane Doe", alamat: "Jl. Example 2", telepon: "098-765-4321" },
+      // dan seterusnya
+    ];
+    var dataPesanan = [
+      { nomor: "P001", pelanggan: "John Doe", tanggal: "01-01-2022", total: 10000 },
+      { nomor: "P002", pelanggan: "Jane Doe", tanggal: "02-01-2022", total: 20000 },
+      // dan seterusnya
+    ];
+    
+    // Fungsi untuk menampilkan data pelanggan atau pesanan
+    function showData(type) {
+      var container = document.getElementById("data-container");
+      var data = type === "pelanggan" ? dataPelanggan : dataPesanan;
+      
+      // Membuat tabel
+      var table = document.createElement("table");
+      
+      // Membuat header tabel
+      var header = table.createTHead();
+      var row = header.insertRow();
+      var headers = type === "pelanggan" ? ["Nama", "Alamat", "Telepon"] : ["Nomor", "Pelanggan", "Tanggal", "Total"];
+      for (var i = 0; i < headers.length; i++) {
+        var cell = row.insertCell();
+        cell.innerHTML = headers[i];
+      }
+      
+     
+      // Membuat body tabel
+      var body = table.createTBody();
+      for (var i = 0; i < data.length; i++) {
+        var row = body.insertRow();
+        var cells = type === "pelanggan" ? [data[i].nama, data[i].alamat, data[i].telepon] : [data[i].nomor, data[i].pelanggan, data[i].tanggal, data[i].total];
+        for (var j = 0; j < cells.length; j++) {
+          var cell = row.insertCell();
+          cell.innerHTML = cells[j];
+        }
+      }
+      
+      // Menampilkan tabel
+      container.innerHTML = "";
+      container.appendChild(table);
+    }
+    
+    // Menampilkan data pelanggan saat halaman dibuka
+    showData("pelanggan");
+  </script>
+</body>
+</html>
